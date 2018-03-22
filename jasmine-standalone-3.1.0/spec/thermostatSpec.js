@@ -1,6 +1,12 @@
 describe('Thermostat', function(){
 
-  var thermostat = new Thermostat;
+
+  var thermostat;
+
+  beforeEach(function() {
+    thermostat = new Thermostat();
+  });
+
   describe('temperature limits', function(){
     it('default is 20 degrees', function(){
       expect(thermostat.temperature()).toBe(20)
@@ -13,11 +19,13 @@ describe('Thermostat', function(){
 
   describe('changes the temperature', function(){
     it('increases the temperature', function(){
-      expect(thermostat.up()).toBe(21)
+      thermostat.up(1)
+      expect(thermostat.temperature()).toBe(21)
     });
 
     it('decreases the temperature', function(){
-      expect(thermostat.down()).toBe(19)
+      thermostat.down(1)
+      expect(thermostat.temperature()).toBe(19)
     });
   });
 
@@ -38,8 +46,33 @@ describe('Thermostat', function(){
     });
 
     it('maximum temperature is 32 degrees', function(){
-      spyOn(thermostat, 'powerSavingOff').and.returnValue(false)
+      thermostat.powerSavingOff()
       expect(thermostat.maximum()).toBe(32)
     });
+  });
+
+  describe('reset the thermostat', function(){
+    it('resets to 20 degrees', function() {
+      expect(thermostat.reset()).toBe(20)
+    });
+  });
+
+  describe('thermostat current energy usage', function(){
+    it('it temp < 18', function() {
+      thermostat.down(8)
+      console.log(thermostat.temperature())
+      expect(thermostat.energyUsage()).toBe('Low Usage')
+    })
+    it('is medium usage', function() {
+      console.log(thermostat.temperature())
+
+      expect(thermostat.energyUsage()).toBe('Medium Usage')
+    })
+    it('is high usage', function() {
+      thermostat.up(10)
+      console.log(thermostat.temperature())
+
+      expect(thermostat.energyUsage()).toBe('High Usage')
+    })
   });
 });
