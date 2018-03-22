@@ -1,6 +1,5 @@
 describe('Thermostat', function(){
 
-
   var thermostat;
 
   beforeEach(function() {
@@ -54,18 +53,24 @@ describe('Thermostat', function(){
   });
 
   describe('thermostat current energy usage', function(){
-    it('it temp < 18', function() {
-      thermostat.down(8)
+    it('is low useage', function() {
+      thermostat._temp = 17
       expect(thermostat.energyUsage()).toBe('Low Usage')
-    })
+    });
 
     it('is medium usage', function() {
-      thermostat._temp
+      thermostat._temp = 18
       expect(thermostat.energyUsage()).toBe('Medium Usage')
-    })
+    });
+
+    it('is medium usage', function() {
+      thermostat._temp = 24
+      expect(thermostat.energyUsage()).toBe('Medium Usage')
+    });
+
     it('is high usage', function() {
-      thermostat.up(10)
+      thermostat._temp = 25
       expect(thermostat.energyUsage()).toBe('High Usage')
-    })
+    });
   });
 });
