@@ -41,14 +41,17 @@ describe('Thermostat', function(){
 
   describe('power saving mode is off', function(){
     it('maximum temperature is 32 degrees', function(){
-      thermostat._powerSav = false
-      expect(thermostat.maximum()).toBe(32)
+      thermostat.psmSwitchOff()
+      thermostat.maximum()
+      expect(thermostat._max).toBe(32)
     });
   });
 
   describe('reset the thermostat', function(){
     it('resets to 20 degrees', function() {
-      expect(thermostat.reset()).toBe(20)
+      thermostat._temp = 23
+      thermostat.reset()
+      expect(thermostat._temp).toBe(20)
     });
   });
 

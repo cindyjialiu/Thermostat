@@ -3,25 +3,44 @@
 function Thermostat() {
   this._temp = 20;
   this._min = 10;
-  this._max = 32;
-  this._defaultMax = 25;
-  this._powerSav = true
+  this._max = 25;
+  this._powerSav = true;
+  this._defaultTemp = 20;
 };
 
 Thermostat.prototype.maximum = function () {
-  return this._powerSav ? this._defaultMax : this._max
+  if(this._powerSav === true) {
+    this._max = 25;
+  }
+  if(this._powerSav === false) {
+    this._max = 32;
+  }
+  return this._max;
 };
 
-Thermostat.prototype.up = function () {
+Thermostat.prototype.up = function() {
+  if (this._temp < this.maximum()) {
   this._temp += 1;
-};
+  }
+}
 
-Thermostat.prototype.down = function () {
+Thermostat.prototype.down = function() {
+  if (this._temp > this._min) {
   this._temp -= 1;
-};
+  }
+}
 
 Thermostat.prototype.reset = function () {
-  return this._temp;
+  this._temp = this._defaultTemp ;
+};
+
+Thermostat.prototype.psmSwitchOn = function () {
+  this._powerSav = true;
+
+};
+
+Thermostat.prototype.psmSwitchOff = function () {
+  this._powerSav = false;
 };
 
 Thermostat.prototype.energyUsage = function () {
