@@ -36,7 +36,7 @@ Thermostat.prototype.reset = function () {
 
 Thermostat.prototype.psmSwitchOn = function () {
   this._powerSav = true;
-
+  this._temp = 25;
 };
 
 Thermostat.prototype.psmSwitchOff = function () {
