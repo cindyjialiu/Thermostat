@@ -1,0 +1,12 @@
+#temperature-head {
+    display: none;
+  }
+.medium-useage {
+  color: black;
+}
+.high-useage {
+  color: red;
+}
+.low-useage {
+  color: blue;
+}

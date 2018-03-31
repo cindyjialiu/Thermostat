@@ -36,19 +36,23 @@ Thermostat.prototype.reset = function () {
 
 Thermostat.prototype.psmSwitchOn = function () {
   this._powerSav = true;
-  this._temp = 25;
+  if(this._temp > 25) {
+    this._temp = 25;}
 };
 
 Thermostat.prototype.psmSwitchOff = function () {
   this._powerSav = false;
 };
 
+const LOW_USEAGE = 'Low Usage';
+const MEDIUM_USEAGE = 'Medium Usage';
+const HIGH_USEAGE = 'High Usage';
 Thermostat.prototype.energyUsage = function () {
   if(this._temp < 18) {
-    return 'Low Usage';
+    return LOW_USEAGE;
   } else if (this._temp < 25) {
-    return 'Medium Usage';
+    return MEDIUM_USEAGE;
   } else {
-    return 'High Usage';
+    return HIGH_USEAGE;
   }
 };

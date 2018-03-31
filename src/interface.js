@@ -1,6 +1,18 @@
 function UpdateUi(thermostat){
   $('#temperature').text(thermostat._temp);
-  $('#powersaving-on').text(thermostat._powerSav ? 'on' : 'off');
+  $('#power-saving-status').text(thermostat._powerSav ? 'on' : 'off');
+  var useage = thermostat.energyUsage();
+  var cssClass;
+  if(useage === LOW_USEAGE) {
+    cssClass = 'low-useage';
+  } else if(useage === MEDIUM_USEAGE) {
+    cssClass = 'medium-useage';
+  } else {
+    cssClass = 'high-useage';
+  }
+
+  $('#temperature').attr('class', cssClass);
+
 }
 
 $(document).ready(function() {
